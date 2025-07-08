@@ -72,6 +72,10 @@ class GradeManager:
     def export_to_json(self, json_file = 'grades.json'):
 
         try:
+            if os.path.exists(json_file):
+                overwrite = input('文件已存在，是否覆盖？(y/n)').lower()
+                if overwrite != 'y':
+                    return
 
             export_data = {
                 'count': len(self.students),
@@ -82,9 +86,14 @@ class GradeManager:
 
             with open(json_file, 'w', encoding='utf-8') as file:
                 json.dump(export_data, file, ensure_ascii=False, indent= 2)
+                print(f'正在导出 {len(self.students)}条记录···')
                 print(f'成功导出到{json_file}')
         except Exception as e:
             print(f'导出失败：{e}')
+        except IOError as e:
+            print(f"文件写入错误: {e}")
+        except TypeError as e:
+            print(f"数据序列化错误: {e}")
 
 
     def calculate_average(self):
@@ -101,10 +110,11 @@ class GradeManager:
             print('暂无学生记录')
             return
         
+        sorted_students = sorted(self.students, key=lambda x:float(x['grade']), reverse=True)
         print('\n学生成绩单')
         print('-' * 30)
         print(f'{'学号':<10}{'姓名':<10}{'成绩':<6}')
-        for student in self.students:
+        for student in sorted_students:
             print(f'{student['id']:<10}{student['name']:<10}{student['grade']:<6}')
             print('-' * 30)
             print(f'平均分：{self.calculate_average()}')
