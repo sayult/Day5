@@ -1,6 +1,7 @@
 import json
 import csv
 import os
+import datetime
 
 class GradeManager:
 
@@ -68,14 +69,15 @@ class GradeManager:
             print(f'输入错误！：{e}')
 
 
-    def export_to_json(self, json_file = 'grades,json'):
+    def export_to_json(self, json_file = 'grades.json'):
 
         try:
 
             export_data = {
                 'count': len(self.students),
                 'students': self.students,
-                'average': self.calculate_average()
+                'average': self.calculate_average(),
+                'time':datetime.datetime.now().isoformat()
             }
 
             with open(json_file, 'w', encoding='utf-8') as file:
