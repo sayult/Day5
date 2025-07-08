@@ -1,0 +1,11 @@
+{
+  "count": 1,
+  "students": [
+    {
+      "id": "001",
+      "name": "Luke",
+      "grade": "90.0"
+    }
+  ],
+  "average": 90.0
+}
