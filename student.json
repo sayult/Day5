@@ -1,0 +1,13 @@
+{
+  "name": "李田所",
+  "courses": [
+    "Python",
+    "数据结构",
+    "算法"
+  ],
+  "scores": {
+    "Python": 90,
+    "数据结构": 90
+  },
+  "is_active": true
+}
