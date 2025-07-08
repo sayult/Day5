@@ -1,11 +1,21 @@
 {
-  "count": 1,
+  "count": 3,
   "students": [
     {
       "id": "001",
       "name": "Luke",
       "grade": "90.0"
+    },
+    {
+      "id": "002",
+      "name": "Obiwan",
+      "grade": "89.0"
+    },
+    {
+      "id": "003",
+      "name": "MAcAser",
+      "grade": "60.0"
     }
   ],
-  "average": 90.0
+  "average": 79.67
 }

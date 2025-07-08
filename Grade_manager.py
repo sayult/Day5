@@ -21,8 +21,13 @@ class GradeManager:
             else:
                 print('未找到文件数据，将创建新文件。')
         except Exception as e:
-            print(f'文件加载失败！：{e}')
+            print(f'文件加载失败！：{e},为您初始化文件。')
             self.students = []
+        except FileNotFoundError:
+            print(f'文件{self.filname}不存在，为您初始化文件。')
+            self.students = []
+        except csv.Error as e:
+            print(f'csv格式错误：{e},已为您初始化文件。')
 
 
     def save_data(self):
@@ -43,13 +48,15 @@ class GradeManager:
         try:
             student_id = input('学号：').strip()
             name = input('姓名:').strip()
-            grade = float(input('成绩：'))
+            grade = float(input('成绩（0-100）：'))
 
             if not 0 <= grade <= 100:
                 raise ValueError('成绩必须在0-100之间！')
             
             if any(s['id'] == student_id for s in self.students):
                 raise ValueError('学号已存在！')
+            if not student_id.isalnum():
+                raise ValueError('学号只能包含字母和数字！')
             
             self.students.append({
                 'id': student_id,
